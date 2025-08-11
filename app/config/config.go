@@ -38,7 +38,8 @@ type Feed struct {
 	Link            string   `yaml:"link"`
 	Image           string   `yaml:"image"`
 	Language        string   `yaml:"language"`
-	TelegramGroupID string   `yaml:"telegram_group_id"`
+	WebhookURL      string   `yaml:"webhook_url"`
+	WebhookRetries  int      `yaml:"webhook_retries"`
 	ExtendDateTitle string   `yaml:"ext_date"`
 	Author          string   `yaml:"author"`
 	OwnerEmail      string   `yaml:"owner_email"`
@@ -68,6 +69,7 @@ func (filter *Filter) Skip(item feed.Item) (bool, error) {
 		}
 		return mayInvert(matched), nil
 	}
+
 	return false, nil
 }
 

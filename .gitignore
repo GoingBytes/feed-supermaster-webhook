@@ -9,6 +9,6 @@ var/
 .vscode/
 user-test.yml
 
-feed-master
+feed-master-webhook
 
 .idea/

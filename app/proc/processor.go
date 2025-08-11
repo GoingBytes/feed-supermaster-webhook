@@ -1,5 +1,3 @@
-// Package proc provided the primary blocking loop
-// updating from sources and making feeds
 package proc
 
 import (
@@ -14,16 +12,10 @@ import (
 	"github.com/umputun/feed-master/app/feed"
 )
 
-// TelegramNotif is interface to send messages to telegram
-type TelegramNotif interface {
-	Send(chanID string, feed feed.Rss2, item feed.Item) error
-}
-
 // Processor is a feed reader and store writer
 type Processor struct {
-	Conf          *config.Conf
-	Store         *BoltDB
-	TelegramNotif TelegramNotif
+	Conf  *config.Conf
+	Store *BoltDB
 }
 
 // Do activate loop of goroutine for each feed, concurrency limited by p.Conf.Concurrent
@@ -48,7 +40,7 @@ func (p *Processor) processFeeds(ctx context.Context) {
 		for _, src := range fm.Sources {
 			name, src, fm := name, src, fm
 			swg.Go(func(context.Context) {
-				p.processFeed(name, src.URL, fm.TelegramGroupID, p.Conf.System.MaxItems, fm.Filter)
+				p.processFeed(name, src.URL, fm.WebhookURL, fm.WebhookRetries, p.Conf.System.MaxItems, fm.Filter)
 			})
 		}
 	}
@@ -59,7 +51,7 @@ func (p *Processor) processFeeds(ctx context.Context) {
 	time.Sleep(p.Conf.System.UpdateInterval)
 }
 
-func (p *Processor) processFeed(name, url, telegramGroupID string, maxVal int, filter config.Filter) {
+func (p *Processor) processFeed(name, url, webhookURL string, webhookRetries int, maxVal int, filter config.Filter) {
 	rss, err := feed.Parse(url)
 	if err != nil {
 		log.Printf("[WARN] failed to parse %s, %v", url, err)
@@ -100,15 +92,16 @@ func (p *Processor) processFeed(name, url, telegramGroupID string, maxVal int, f
 
 		rptr := repeater.NewDefault(3, 5*time.Second)
 		err = rptr.Do(context.Background(), func() error {
-			if e := p.TelegramNotif.Send(telegramGroupID, rss, item); e != nil {
-				log.Printf("[WARN] failed attempt to send telegram message, url=%s to channel=%s, %v",
-					item.Enclosure.URL, telegramGroupID, e)
+			wc := NewWebhookClient(webhookURL, webhookRetries)
+
+			if e := wc.Send(rss, item); e != nil {
+				log.Printf("[WARN] failed attempt to send webhook, url=%s, err=%v", webhookURL, err)
 				return err
 			}
 			return nil
 		})
 		if err != nil {
-			log.Printf("[WARN] failed to send telegram message, to channel=%s, %v", telegramGroupID, err)
+			log.Printf("[WARN] failed attempt to send webhook, url=%s, err=%v", webhookURL, err)
 		}
 	}
 

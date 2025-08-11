@@ -1,0 +1,13 @@
+[Unit]
+Description=Feed-Master webooks
+After=network.target
+
+[Service]
+ExecStart=/opt/feed-master/feed-master-webhook --db=/opt/feed-master/feed-master.bdb --conf=/opt/feed-master/feeds.yml
+Restart=always
+User=root
+Group=root
+WorkingDirectory=/opt/feed-master-webhook
+
+[Install]
+WantedBy=multi-user.target

@@ -1,13 +1,13 @@
 default: release
 
 build: clean
-    go build -race -o feed-master app/main.go
+    go build -race -o feed-master-webhook app/main.go
 
 release: clean
-    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o feed-master -ldflags="-s -w" app/main.go
+    CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o feed-master-webhook -ldflags="-s -w" app/main.go
 
 release_musl: clean
-    CC="musl-gcc" LD="musl-ld" CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o feed-master -ldflags="-s -w -extld=musl-gcc" app/main.go
+    CC="musl-gcc" LD="musl-ld" CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o feed-master-webhook -ldflags="-s -w -extld=musl-gcc" app/main.go
 
 clean:
-    rm -f feed-master
+    rm -f feed-master-webhook

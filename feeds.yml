@@ -1,11 +1,13 @@
 feeds:
   computer_vision:
-    telegram_group_id: -1002075434721
+    webhook_url: https://webhook.site/25eb4a5a-7220-4787-b9f4-2fbd40c4720d
+    webhook_retries: 10
     sources:
       - name: cs.CV
         url: https://rss.arxiv.org/rss/cs.CV
   go:
-    telegram_group_id: -1002049812124
+    webhook_url: https://webhook.site/25eb4a5a-7220-4787-b9f4-2fbd40c4720d
+    webhook_retries: 10
     sources:
       - name: The Go Blog
         url: https://go.dev/blog/feed.atom?format=xml
@@ -22,7 +24,8 @@ feeds:
       - name: hacker-news
         url: https://hnrss.org/newest?q=golang
   rust:
-    telegram_group_id: -1001869387030
+    webhook_url: https://webhook.site/25eb4a5a-7220-4787-b9f4-2fbd40c4720d
+    webhook_retries: 10
     sources:
       - name: Steve Klabnik
         url: https://steveklabnik.com/feed.xml
@@ -31,7 +34,8 @@ feeds:
       - name: hacker-news
         url: https://hnrss.org/newest?q=rust
   engineering:
-    telegram_group_id: -1002020551433
+    webhook_url: https://webhook.site/25eb4a5a-7220-4787-b9f4-2fbd40c4720d
+    webhook_retries: 10
     sources:
       - name: Google
         url: https://feeds.feedburner.com/GDBcode
