@@ -1,12 +1,12 @@
 feeds:
   computer_vision:
-    webhook_url: https://webhook.site/25eb4a5a-7220-4787-b9f4-2fbd40c4720d
+    webhook_url: https://webhook.site/793f686d-5c6b-4672-9def-47499c25decd
     webhook_retries: 10
     sources:
       - name: cs.CV
         url: https://rss.arxiv.org/rss/cs.CV
   go:
-    webhook_url: https://webhook.site/25eb4a5a-7220-4787-b9f4-2fbd40c4720d
+    webhook_url: https://webhook.site/793f686d-5c6b-4672-9def-47499c25decd
     webhook_retries: 10
     sources:
       - name: The Go Blog
@@ -24,7 +24,7 @@ feeds:
       - name: hacker-news
         url: https://hnrss.org/newest?q=golang
   rust:
-    webhook_url: https://webhook.site/25eb4a5a-7220-4787-b9f4-2fbd40c4720d
+    webhook_url: https://webhook.site/793f686d-5c6b-4672-9def-47499c25decd
     webhook_retries: 10
     sources:
       - name: Steve Klabnik
@@ -34,7 +34,7 @@ feeds:
       - name: hacker-news
         url: https://hnrss.org/newest?q=rust
   engineering:
-    webhook_url: https://webhook.site/25eb4a5a-7220-4787-b9f4-2fbd40c4720d
+    webhook_url: https://webhook.site/793f686d-5c6b-4672-9def-47499c25decd
     webhook_retries: 10
     sources:
       - name: Google
