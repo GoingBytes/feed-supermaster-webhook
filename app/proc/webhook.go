@@ -24,8 +24,6 @@ type WebhookPayload struct {
 }
 
 func NewWebhookClient(url string, retries int) *WebhookClient {
-	log.Printf("[INFO] create webhook client")
-
 	return &WebhookClient{
 		URL:     url,
 		Retries: retries,
