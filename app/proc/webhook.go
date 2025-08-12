@@ -60,7 +60,7 @@ func (client WebhookClient) sendHook(rssFeed feed.Rss2, item feed.Item) (message
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
+	if resp.StatusCode != http.StatusOK && resp.StatusCode != http.StatusCreated && resp.StatusCode != http.StatusAccepted {
 		return item, fmt.Errorf("unexpected status code: %d", resp.StatusCode)
 	}
 
