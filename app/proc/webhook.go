@@ -30,7 +30,7 @@ func NewWebhookClient(url string, retries int) *WebhookClient {
 	}
 }
 
-func (client WebhookClient) sendHook(rssFeed feed.Rss2, item feed.Item) (message feed.Item, err error) {
+func (client WebhookClient) sendHook(_ feed.Rss2, item feed.Item) (message feed.Item, err error) {
 	retryClient := retryablehttp.NewClient()
 	retryClient.RetryMax = client.Retries
 
