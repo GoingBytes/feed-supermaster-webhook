@@ -3,7 +3,7 @@ Description=Feed-Master webooks
 After=network.target
 
 [Service]
-ExecStart=/opt/feed-master/feed-master-webhook --db=/opt/feed-master/feed-master.bdb --conf=/opt/feed-master/feeds.yml
+ExecStart=/usr/bin/feed-master-webhook --db=/opt/feed-master-webhook/feed-master.bdb --conf=/opt/feed-master-webhook/feeds.yml
 Restart=always
 User=root
 Group=root
