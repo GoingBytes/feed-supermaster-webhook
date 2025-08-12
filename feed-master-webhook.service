@@ -1,5 +1,5 @@
 [Unit]
-Description=Feed-Master webooks
+Description=Feed-Master Webhook
 After=network.target
 
 [Service]
