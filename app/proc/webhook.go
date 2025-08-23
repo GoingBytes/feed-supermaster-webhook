@@ -19,8 +19,9 @@ type WebhookClient struct {
 }
 
 type WebhookPayload struct {
-	ItemTitle string `json:"item_title"`
-	ItemURL   string `json:"item_url"`
+	ItemTitle   string `json:"item_title"`
+	ConvertMode string `json:"convert_mode"`
+	ItemURL     string `json:"item_url"`
 }
 
 func NewWebhookClient(url string, retries int) *WebhookClient {
@@ -37,8 +38,9 @@ func (client WebhookClient) sendHook(_ feed.Rss2, item feed.Item) (message feed.
 	standardClient := retryClient.StandardClient()
 
 	data := WebhookPayload{
-		ItemTitle: item.Title,
-		ItemURL:   item.Link,
+		ItemTitle:   item.Title,
+		ItemURL:     item.Link,
+		ConvertMode: "url",
 	}
 	jsonData, err := json.Marshal(data)
 	if err != nil {

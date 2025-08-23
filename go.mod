@@ -1,6 +1,6 @@
 module github.com/umputun/feed-master
 
-go 1.24.6
+go 1.25.0
 
 require (
 	github.com/go-pkgz/lgr v0.12.1
@@ -9,7 +9,7 @@ require (
 	github.com/hashicorp/go-retryablehttp v0.7.8
 	github.com/jessevdk/go-flags v1.6.1
 	github.com/pkg/errors v0.9.1
-	go.etcd.io/bbolt v1.4.2
+	go.etcd.io/bbolt v1.4.3
 	gopkg.in/yaml.v3 v3.0.1
 )
 
